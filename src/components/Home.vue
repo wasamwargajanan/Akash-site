@@ -82,7 +82,67 @@ Variety of Displays</h1>
             <v-img src="@/clients_banner-1-1024x160.jpg">             
             </v-img>
           </v-col>
+
+          <v-col cols="12">
+            <div class="priceDiv">
+              <h1 class="text-center black--text">GET A PRICE FOR YOUR OUTDOOR DIGITAL BANNER</h1>
+              <p class="text-center black--text">It’s very easy! Just fill the sizes you are interested in and get your quote now</p>
+              <div class="d-flex">
+                <v-text-field
+                v-model="boardWidth"
+                color="white"
+                label="Width ( ft )"
+                class="mr-6"
+                outlined
+                dense
+                ></v-text-field>
+                <v-text-field
+                v-model="boardHeight"
+                color="white"
+                label="Height ( ft )"
+                class="mr-6"
+                outlined
+                dense
+                ></v-text-field>
+                <v-hover v-slot="{ hover }">
+                  <v-btn
+                  :outlined="hover ? true:false"
+                  :color="hover ? 'white' : 'purple'"                  
+                   tile
+                   
+                  @click="getPrice"
+                  >GET A PRICE</v-btn>
+                </v-hover>
+                 
+              </div>
+            </div>
+          </v-col>
         </v-row>
+        <v-row v-if="totalBoardSize">
+          <v-col cols="12" md="4">
+            <ul cols="12" class="priceList pa-md-3">
+                <h1>Price List</h1>
+                <li><h2>Normal Board Rate  = {{ nrmlPrice }}    </h2></li>
+                <li><h2>BackLight Board Rate  = {{ backlightPrice }}  </h2></li>
+                <li><h2>LED Board Rate  = {{ ledPrice }}  </h2></li>
+              </ul>
+          </v-col>
+          <v-col cols="12" md="4">
+            <ul class=" pa-md-3 priceList">
+                <h1>Total Size</h1>
+                <li><h2>Size is: {{ totalBoardSize }}ft</h2></li>
+              </ul>
+          </v-col>
+          <v-col cols="12" md="4">
+            <ul class=" pa-md-3 priceList">
+                <h1>Total Amount</h1>
+                <li><h2>Normal: {{ nrmlTotalPrice }}rs </h2></li>
+                <li><h2>BackLight: {{ backlightTotalPrice }}rs </h2></li>
+                <li><h2>LED: {{ ledTotalPrice }}rs </h2></li>
+              </ul>
+          </v-col>
+        </v-row>
+        
        </v-container>
     </div>
   </template>
@@ -96,9 +156,38 @@ Variety of Displays</h1>
           "Rótulos de nueva generación para comercios",
           "Diferenciese de su competencia",
           "Inversion rentable rapida amortizacion"
-        ]
+        ],
+        listOfBoards:[
+          'Normal Board Rate',
+          'BackLight Board Rate',
+          'LED Board Rate'
+        ],
+        boardWidth:null,
+        boardHeight:null,
+        totalBoardSize:null,
+        ledTotalPrice:null,
+        backlightTotalPrice:null,
+        nrmlTotalPrice:null,
+        ledPrice:900,
+        backlightPrice:700,
+        nrmlPrice:500
       
       }),
+      methods:{
+        getPrice(){
+          if(this.boardWidth && !this.boardHeight || !this.boardWidth && this.boardHeight || this.boardWidth == null && this.boardHeight == null){
+            alert('please fill both the fields')
+          }
+          if(this.boardWidth && this.boardHeight){
+           this.totalBoardSize =  this.boardWidth * this.boardHeight
+            this.ledTotalPrice = this.totalBoardSize * this.ledPrice
+            this.backlightTotalPrice = this.totalBoardSize * this.backlightPrice
+            this.nrmlTotalPrice = this.totalBoardSize * this.nrmlPrice
+          }
+
+
+        }
+      }
     }
   </script>
   <style>
@@ -144,4 +233,14 @@ Variety of Displays</h1>
 .clients{
   background: white;
 }
+.priceDiv{
+  background: rgb(247, 92, 36);
+  border: 1px solid black;
+  padding: 20px 35px;
+}
+.priceList{   
+  background: rgb(102, 29, 2);
+  list-style: none;
+  }
+ 
 </style>

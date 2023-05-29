@@ -11,7 +11,17 @@
       <v-list
         nav
         dense
-      >  
+      > 
+      <router-link
+          class="sidebar-router-link d-block text-decoration-none my-1 h6"
+          :to="{ name: 'Home'}"
+        >
+        <v-list-item>
+          <v-icon>mdi-home</v-icon>
+            <v-list-item-title class="pl-2">Home</v-list-item-title>
+          </v-list-item>
+
+      </router-link>  
       <router-link
           class="sidebar-router-link d-block text-decoration-none my-1 h6"
           :to="{ name: 'Services'}"
