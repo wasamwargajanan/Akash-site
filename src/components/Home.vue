@@ -108,8 +108,7 @@ Variety of Displays</h1>
                   <v-btn
                   :outlined="hover ? true:false"
                   :color="hover ? 'white' : 'purple'"                  
-                   tile
-                   
+                   tile                   
                   @click="getPrice"
                   >GET A PRICE</v-btn>
                 </v-hover>
